@@ -18,7 +18,7 @@ You can complete the environment installation using either of the two methods be
 
 ## Docker Image
 To avoid potential issues during environment setup, we recommend using the provided docker image file to create a container.
-You can download the image file from [[Baidu Pan](https://pan.baidu.com/s/1rc7SSviRneh9Q9E2Y-WLlg) (code:aco5)] (code:to be done).
+You can download the image file from [[Baidu Pan](https://pan.baidu.com/s/1rc7SSviRneh9Q9E2Y-WLlg) (code: aco5)] .
 
 If you have successfully created a container from the image file, skip to the data preparation step.
 
@@ -58,7 +58,7 @@ You can also directly download the processed files from their links.
 
 
 # Test with Our Checkpoints
-You can download our model checkpoints——by [[Baidu Pan](https://pan.baidu.com/s/176CHoJuXjn3gOSxnyaJH7w) (code:phyb)]
+You can download our model checkpoints——by [[Baidu Pan](https://pan.baidu.com/s/176CHoJuXjn3gOSxnyaJH7w) (code: phyb)]
 
 After downloading the pretrained weights, you can put it in `./models_checkpoint/` and reproduce the results reported in our paper as follows:
 ```python
