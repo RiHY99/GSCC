@@ -186,7 +186,7 @@ def main(args):
     if args.encoder == 'resnet':
         encoder_dim = 1024
     chg_filter = ChangeFilter(args, ini_d=encoder_dim)
-    encoder_feat = FeatureFusion(args, ini_dim=encoder_dim, cross_atten_dim=args.cross_atten_dim)
+    encoder_feat = FeatureFusion_ori_G(args, ini_dim=encoder_dim, cross_atten_dim=args.cross_atten_dim)
     # Decoder
     args.feature_dim_de = 1024
     if args.decoder == 'trans':
@@ -357,3 +357,4 @@ if __name__ == '__main__':
     args.savepath = os.path.join(args.savepath, args.tag)
 
     main(args)
+
