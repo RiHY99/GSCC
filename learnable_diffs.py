@@ -120,9 +120,9 @@ class ChangeFilter(nn.Module):
 
 
 
-class myresblock(nn.Module):
+class myresblock_ori_G(nn.Module):
     def __init__(self, inchannel, outchannel):
-        super(myresblock, self).__init__()
+        super(myresblock_ori_G, self).__init__()
         self.left = nn.Sequential(
             nn.Conv2d(inchannel, int(outchannel/2), kernel_size=1),
             nn.BatchNorm2d(int(outchannel/2)),
@@ -150,9 +150,9 @@ class myresblock(nn.Module):
         return F.relu(out)
 
 
-class FeatureFusion(nn.Module):
+class FeatureFusion_ori_G(nn.Module):
     def __init__(self, args, ini_dim, cross_atten_dim):
-        super(FeatureFusion, self).__init__()
+        super(FeatureFusion_ori_G, self).__init__()
         self.args = args
         self.cross_atten_dim = cross_atten_dim
         self.proj = nn.Linear(ini_dim, cross_atten_dim)
@@ -165,7 +165,7 @@ class FeatureFusion(nn.Module):
         else:
             raise NotImplementedError
 
-        self.resblock = nn.ModuleList([myresblock(cross_atten_dim * 2, cross_atten_dim * 2) for i in range(args.res_n_layers)])
+        self.resblock = nn.ModuleList([myresblock_ori_G(cross_atten_dim * 2, cross_atten_dim * 2) for i in range(args.res_n_layers)])
 
         self.LN = nn.ModuleList([nn.LayerNorm(cross_atten_dim * 2) for i in range(args.res_n_layers)])
 
@@ -230,3 +230,4 @@ class FeatureFusion(nn.Module):
             i = i + 1
 
         return output
+
