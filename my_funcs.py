@@ -4,7 +4,6 @@ from torch import nn
 from torch.nn import functional as F
 import numpy as np
 import json
-from distri_diff_measure import *
 
 
 
@@ -44,4 +43,5 @@ def get_full_edge(batch_size, node_num, device):
                 edge.append([p, q])
     edge_tensor = (torch.from_numpy((np.array(edge)).T)).contiguous().to(device)
     return edge_tensor
+
 
