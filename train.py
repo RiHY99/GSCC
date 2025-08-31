@@ -9,7 +9,7 @@ import argparse
 from torch.optim.lr_scheduler import StepLR
 
 from models import CNN_Encoder
-from models_decoder import *
+from models_RSICCformerDfusion import *
 from learnable_diffs import *
 from my_funcs import *
 from datasets import *
@@ -357,4 +357,5 @@ if __name__ == '__main__':
     args.savepath = os.path.join(args.savepath, args.tag)
 
     main(args)
+
 
