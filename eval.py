@@ -7,7 +7,7 @@ import torch.nn.functional as F
 from tqdm import tqdm
 import argparse
 import time
-from learnable_diffs import *
+from learnable_diffs import load_compatible_model
 from my_funcs import *
 import torchvision.utils as vutils
 normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
@@ -322,6 +322,7 @@ if __name__ == '__main__':
     parser.add_argument('--sig_w', type=float, default=50.0, help='scale factor for sigmoid')
     parser.add_argument('--kv_new', type=bool, default=True, help='kv update during fusion attention')
     parser.add_argument('--mask_head', type=int, default=8, help='multi-head num of mask')
+    parser.add_argument('--eval_old', type=bool, default=False, help='eval with old version ckpts')
     args = parser.parse_args()
 
     ckpt_path = os.path.join(args.savedir, args.tag)
@@ -341,7 +342,10 @@ if __name__ == '__main__':
         device = torch.device('cuda', index=args.gpu) if torch.cuda.is_available() else torch.device('cpu')
 
         # Load model
-        checkpoint = torch.load(checkpoint_path, map_location=str(device))
+        if args.eval_old is True:
+            checkpoint = load_compatible_model(checkpoint_path, device)
+        else:
+            checkpoint = torch.load(checkpoint_path, map_location=str(device))
         encoder_image = checkpoint['encoder_image']
         chg_filter = checkpoint['chg_filter']
         encoder_feat = checkpoint['encoder_feat']
@@ -357,4 +361,5 @@ if __name__ == '__main__':
                metrics["METEOR"], metrics["ROUGE_L"], metrics["CIDEr"]))
         print("\n")
         print("\n")
+
         time.sleep(10)
