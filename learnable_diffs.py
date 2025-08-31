@@ -231,3 +231,29 @@ class FeatureFusion_ori_G(nn.Module):
 
         return output
 
+
+class CompatibilityModule:
+    def __init__(self):
+        self.CrossAtten = CrossAtten
+
+def enable_backward_compatibility():
+    sys.modules['feature_fusion'] = CompatibilityModule()
+
+def disable_backward_compatibility():
+    if 'feature_fusion' in sys.modules and isinstance(sys.modules['feature_fusion'], CompatibilityModule):
+        del sys.modules['feature_fusion']
+
+def load_compatible_model(checkpoint_path, device):
+    
+    enable_backward_compatibility()
+    
+    try:
+        checkpoint = torch.load(checkpoint_path, map_location=str(device))
+        
+        return checkpoint
+        
+    finally:
+        disable_backward_compatibility()
+
+
+
