@@ -62,7 +62,7 @@ You can download our model checkpoints——by [[Baidu Pan](https://pan.baidu.co
 
 After downloading the pretrained weights, you can put it in `./models_checkpoint/` and reproduce the results reported in our paper as follows:
 ```python
-python eval.py --gpu 0 --tag BEST_LEVIR-CC --sig_w 50.0 --top_k 112 --mask_head 8
+python eval.py --gpu 0 --tag BEST_LEVIR-CC --sig_w 50.0 --top_k 112 --mask_head 8 --eval_old True
 ```
 
 
