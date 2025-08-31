@@ -2,6 +2,7 @@ import torch,os
 from torch import nn
 from torch.nn import functional as F
 import numpy as np
+import sys
 import json
 import torch_geometric as tg
 from torch_geometric.nn import GCNConv
@@ -254,6 +255,7 @@ def load_compatible_model(checkpoint_path, device):
         
     finally:
         disable_backward_compatibility()
+
 
 
 
