@@ -186,11 +186,10 @@ class FeatureFusion_ori_G(nn.Module):
 
         if self.args.encoder == 'resnet':
             length = x1.shape[1]
-            if self.args.wherePE == 'fusion':
-                positions = torch.arange(length, device=x1.device).expand(batch, length)
-                position_embeddings = self.position_embeddings(positions)  # [batch, length, dim]
-                x1 = x1 + position_embeddings
-                x2 = x2 + position_embeddings
+            positions = torch.arange(length, device=x1.device).expand(batch, length)
+            position_embeddings = self.position_embeddings(positions)  # [batch, length, dim]
+            x1 = x1 + position_embeddings
+            x2 = x2 + position_embeddings
 
         output1_list = []
         weight1_list = []
@@ -255,6 +254,7 @@ def load_compatible_model(checkpoint_path, device):
         
     finally:
         disable_backward_compatibility()
+
 
 
 
